@@ -1,0 +1,685 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Titillium+Web:400,700');
+
+html, body, #react {
+    height: 100%;
+}
+
+body {
+    overflow-y: scroll;
+    font-family: "Titillium Web", sans-serif;
+}
+
+main {
+    min-height: calc(100% - (137px + 24px + 24px + 176px));
+}
+
+.now-showing-header {
+    padding: 0px 20px;
+}
+
+.map-container {
+    height: 400px;
+}
+
+:root {
+    --orange-light: #fd952b;
+    --orange-base: #fb8030;
+    --orange-dark: #fd2c0e;
+
+    --blue-light: #51a29d;
+    --blue-base: #1f757f;
+    --blue-dark: #032759;
+}
+
+.card--movie {
+    --gradient: linear-gradient(to right, rgba(15, 32, 39,1), rgba(31, 56, 65, 0.5), rgba(44, 83, 100,1));
+
+    z-index: 1;
+
+    position: relative;
+
+    color: #FFF;
+    text-shadow: 0px 1px #000;
+}
+
+.card--movie::before {
+    content: "";
+    z-index: -1;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+
+    background-image: var(--gradient), var(--backdrop-url), url("/static/img/movie-backdrop.png");
+    background-size: cover;
+    background-position: top center;
+
+    opacity: 0.8;
+    filter: blur(5px) grayscale(20%);
+    clip-path: inset(0px);
+}
+
+.card--movie::after {
+    content: "";
+    z-index: -2;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+
+    background-image: var(--gradient), var(--backdrop-url);
+    background-size: cover;
+    background-position: top center;
+
+    opacity: 0.8;
+    filter: grayscale(50%) contrast(50%);
+}
+
+.card--movie .card-footer {
+    border: none;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.card--movie img {
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.9);
+}
+
+.card--movie .alert {
+    margin-bottom: 0px;
+    margin-top: 0.75rem;
+    text-shadow: none;
+}
+
+.card--movie .btn {
+    font-family: "Montserrat";
+    font-size: 0.75rem;
+    padding: 0.75rem 2rem;
+    text-transform: uppercase;
+    box-sizing: content-box;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+
+    transition: background 0s, box-shadow 0.2s;
+}
+
+.card--movie .btn:hover {
+    text-decoration: underline;
+}
+
+.card--movie .btn:focus {
+    box-shadow: 0px 0px 0px 2px var(--orange-light)!important;
+}
+
+.card--movie .btn > svg {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+}
+
+.card--movie .btn-primary {
+    background: var(--orange-dark);
+    border: 1px solid var(--orange-dark);
+}
+
+.card--movie .btn-primary:hover {
+    background: linear-gradient(135deg, var(--orange-base), var(--orange-dark), var(--orange-dark));
+    border: 1px solid var(--orange-dark);
+}
+
+.card--movie .btn-primary:active {
+    background: linear-gradient(135deg, var(--orange-base), var(--orange-dark))!important;
+    border: 1px solid var(--orange-dark)!important;
+}
+
+.card--movie .btn-secondary {
+    background: var(--blue-base);
+    border: 1px solid var(--blue-base);
+}
+
+.card--movie .btn-secondary:hover {
+    background: linear-gradient(135deg, var(--blue-light), var(--blue-base));
+    border: 1px solid var(--blue-base);
+}
+
+.card--movie .btn-secondary:active {
+    background: linear-gradient(135deg, var(--blue-light), var(--blue-base))!important;
+    border: 1px solid var(--blue-base)!important;
+}
+
+.page--auth {
+    background-image: url("/static/img/movie-backdrop.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.card--auth {
+    width: 400px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #FFF;
+}
+
+.card--auth__social {
+    color: #FFC312;
+    font-size: 60px;
+    height: 0px;
+    position: relative;
+    top: calc(-100% - 40px);
+}
+
+.prepend--auth span {
+    background: #FFC312;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.button--auth {
+    background: #FFC312;
+    color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+.button--auth:hover {
+    background: #b2880d;
+    color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+
+.page--sign-in {
+    min-height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-image: url("/static/img/characters.jpg");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    /* 64px + 480px + 64px + 128px = 672px */
+    background-position: right 736px bottom 0px;
+    background-attachment: fixed;
+    padding: 24px 128px;
+
+    font-family: "Titillium Web", sans-serif!important;
+}
+
+.page--sign-in > div {
+    position: relative;
+}
+
+.page--sign-in__back {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 32px;
+    height: 32px;
+}
+
+.page--sign-in__back svg {
+    width: 100%;
+    height: 100%;
+}
+
+.page--sign-in h1 {
+    font-family: "Titillium Web", sans-serif!important;
+    font-weight: bold;
+}
+
+.page--sign-in > div {
+    box-sizing: content-box;
+    width: 480px;
+    padding: 0px 64px;
+}
+
+.page--sign-in__divider {
+    height: 4rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page--sign-in__divider::before {
+    z-index: 1;
+    content: "";
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    background: radial-gradient(#ccc, #fff);
+    height: 1px;
+}
+
+.page--sign-in__divider::after {
+    z-index: 2;
+    content: "OR";
+    background: #FFF;
+    padding: 0px 1rem;
+    font-family: "Titillium Web", sans-serif;
+}
+
+
+.page--sign-in .form-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 0px;
+}
+
+.page--sign-in .form-control {
+    border-width: 0px 0px 2px 0px;
+    border-color: grey;
+    border-radius: 0px;
+    padding: 0.5rem 0px;
+    height: auto;
+    box-shadow: none;
+}
+
+.page--sign-in .form-control:focus {
+    border-color: var(--orange-dark);
+}
+
+.page--sign-in .form-control:focus + .form-label {
+    color: var(--orange-dark);
+}
+
+.page--sign-in a {
+    color: var(--orange-dark);
+    font-weight: bold;
+}
+
+.page--sign-in button {
+    padding: 1rem;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-family: "Montserrat";
+    background-color: var(--background-color)!important;
+    border-color: var(--border-color)!important;
+    border-width: 2px;
+    color: var(--color)!important;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+.page--sign-in button svg {
+    position: absolute;
+    left: 16px;
+
+    width: 24px;
+    height: 24px;
+}
+
+.page--sign-in button:hover {
+    text-decoration: underline;
+}
+
+.page--sign-in button:focus {
+    box-shadow: 0 0 0 0.2rem var(--orange-light)!important;
+}
+
+.page--sign-in__login {
+    --background-color: var(--orange-dark);
+    --border-color: transparent;
+    --color: #FFF;
+}
+
+.page--sign-in__login--google {
+    --background-color: transparent;
+    --border-color: var(--blue-base);
+    --color: var(--blue-base);
+}
+
+.page--sign-in__login--facebook {
+    --background-color: var(--blue-dark);
+    --border-color: transparent;
+    --color: #FFF;
+}
+
+
+
+.page--sign-up {
+    min-height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-image: url("/static/img/characters.jpg");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    /* 64px + 480px + 64px + 128px = 672px */
+    background-position: left 736px bottom 0px;
+    background-attachment: fixed;
+    padding: 24px 128px;
+
+    font-family: "Titillium Web", sans-serif!important;
+}
+
+.page--sign-up h1 {
+    font-family: "Titillium Web", sans-serif!important;
+    font-weight: bold;
+}
+
+.page--sign-up > div {
+    box-sizing: content-box;
+    width: 480px;
+    padding: 0px 64px;
+    position: relative;
+}
+
+.page--sign-up__divider {
+    height: 4rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page--sign-up__divider::before {
+    z-index: 1;
+    content: "";
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    background: radial-gradient(#ccc, #fff);
+    height: 1px;
+}
+
+.page--sign-up__divider::after {
+    z-index: 2;
+    content: "OR";
+    background: #FFF;
+    padding: 0px 1rem;
+    font-family: "Titillium Web", sans-serif;
+}
+
+
+.page--sign-up .form-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 0px;
+}
+
+.page--sign-up .form-control {
+    border-width: 0px 0px 2px 0px;
+    border-color: grey;
+    border-radius: 0px;
+    padding: 0.5rem 0px;
+    height: auto;
+    box-shadow: none;
+}
+
+.page--sign-up .form-control:focus {
+    border-color: var(--orange-dark);
+}
+
+.page--sign-up .form-control:focus + .form-label {
+    color: var(--orange-dark);
+}
+
+.page--sign-up a {
+    color: var(--orange-dark);
+    font-weight: bold;
+}
+
+.page--sign-up button {
+    padding: 1rem;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-family: "Montserrat";
+    background-color: var(--background-color)!important;
+    border-color: var(--border-color)!important;
+    border-width: 2px;
+    color: var(--color)!important;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+.page--sign-up button svg {
+    position: absolute;
+    left: 16px;
+
+    width: 24px;
+    height: 24px;
+}
+
+.page--sign-up button:hover {
+    text-decoration: underline;
+}
+
+.page--sign-up button:focus {
+    box-shadow: 0 0 0 0.2rem var(--orange-light)!important;
+}
+
+.page--sign-up__back {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 32px;
+    height: 32px;
+}
+
+.page--sign-up__back svg {
+    width: 100%;
+    height: 100%;
+}
+
+
+.page--preferences {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 100%;
+
+    font-family: "Titillium Web", sans-serif;
+}
+
+.page--preferences h1 {
+    font-weight: bold;
+}
+
+.page--preferences > div {
+    width: 960px;
+    min-height: 100%;
+    position: relative;
+    padding: 0px 64px;
+    box-sizing: content-box;
+}
+
+.page--preferences form {
+    border-radius: 0.25rem 0.25rem 0 0;
+}
+
+
+.page--preferences__genre-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+}
+
+.page--preferences__genre-container label:first-child {
+    grid-column-start: span 4;
+}
+
+.page--preferences__genre {
+    min-width: 128px;
+    display: flex;
+    padding: 2rem 0;
+    border-radius: 0.25rem;
+    margin: 0px;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    position: relative;
+
+    border: 1px solid var(--orange-base);
+    color: var(--orange-base);
+
+    justify-content: center;
+    text-transform: uppercase;
+    font-family: "Montserrat";
+}
+
+.page--preferences__genre:hover {
+    border-color: var(--orange-dark);
+    color: var(--orange-dark);
+    cursor: pointer;
+}
+
+.page--preferences__genre-checkbox {
+    display: none;
+}
+
+.page--preferences__genre-checkbox:checked + .page--preferences__genre {
+    background: linear-gradient(135deg, var(--orange-base), var(--orange-dark));
+    color: #FFF;
+}
+
+.page--preferences__genre span {
+    font-size: 1rem;
+}
+
+.page--preferences__genre input {
+    margin-left: auto;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+
+.page--preferences__icon {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 32px;
+    height: 32px;
+}
+
+
+.nav-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--orange-dark);
+    background: linear-gradient(135deg, var(--orange-light), var(--orange-base), var(--orange-dark));
+    border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+
+    z-index: 100;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4);
+
+    margin-bottom: 24px;
+}
+
+.nav-bar__brand span:first-child {
+    font-family: "Monoton", serif;
+    font-size: 64px;
+    color: #FFF;
+}
+
+.nav-bar__brand span:last-child {
+    font-family: "Montserrat", sans-serif;
+    font-size: 32px;
+    color: #FFF;
+}
+
+.nav-bar > * {
+    width: 1140px;
+    padding: 0px 15px;
+}
+
+.nav-bar__links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-bar__links > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-bar__links--left a:first-child {
+    margin-left: -15px;
+}
+
+.nav-bar__links .nav-link {
+    color: #FFF;
+    font-family: "Montserrat", sans-serif;
+
+    border-radius: 0.25rem 0.25rem 0px 0px;
+}
+
+.nav-bar__links .nav-link:hover {
+    text-decoration: underline;
+}
+
+.nav-bar__links .nav-link.active {
+    color: var(--orange-dark);
+    /*border: 1px solid var(--orange-base);
+    border-bottom-width: 0px;*/
+    border: none;
+    background: #FFF;
+    box-shadow: 0px 8px #FFF, 0px 0px 0px 1px rgba(255, 0, 0, 0.3);
+}
+
+
+.footer {
+    background: linear-gradient(135deg, var(--blue-base), var(--blue-dark));
+    color: #FFF;
+    font-size: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 24px;
+    margin-bottom: -24px;
+}
+
+.footer svg {
+    padding: 0px 16px;
+    box-sizing: content-box;
+
+    stroke: #032759;
+    stroke-width: 1rem;
+}
+
+.footer svg:hover {
+    cursor: pointer;
+    color: var(--blue-base);
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: bold;
+}
+
+
+.list__filter {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.85rem;
+
+    max-height: calc(100% - 24px);
+    position: sticky;
+    top: 12px;
+    overflow-y: auto;
+}
+
+.list__filter .list-group-item.active {
+    background: linear-gradient(135deg, var(--blue-base), var(--blue-dark));
+    border-color: transparent;
+}
